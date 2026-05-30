@@ -1,0 +1,48 @@
+# Trabalho Prático 1 - DCO-LEI-FCUL
+
+## Overview
+
+Este é um projeto que contém o código e artefactos fornecidos para o
+Trabalho Prático 1, organizado de acordo com a solução de desenho fornecida no
+enunciado.
+
+O objetivo principal deste trabalho é que os alunos exercitem a utilização 
+das técnicas e dos princípios de programação e desenho OO lecionados na disciplina. 
+
+O trabalho centra-se numa aplicação que é um gestor de fotos.
+
+Esta versão contém uma interface gráfica (`GUIClient`) que suporta algumas das
+funcionalidades cobertas, nomeadamente:
+
+- Ver o conteúdo da biblioteca principal e do lixo através das vistas existentes.
+- Ver o conteúdo de um conjunto de álbuns pré-definidos (com 2 cliques).
+- Selecionar uma ou mais fotos da biblioteca e colocá-las num álbum.
+- Apagar fotos e apagar álbuns.
+- Fazer pesquisas (baseadas em texto) de fotos nas vistas e nos álbuns 
+
+Para além disso, é fornecido um programa cliente (`SimpleClient`) que exercita
+várias outras funcionalidades da aplicação assim como alguns testes end-to-end.
+
+## Pré-Requisitos
+
+- JDK (Java Development Kit) 17 ou superior instalado (recomendado Oracle ou
+	OpenJDK).
+- IDE de sua preferência para Java (recomendado VSCode ou Eclipse).
+
+Com os pré-requisitos recomendados satisfeitos, bastará importar o projeto no
+IDE para, uma vez completada a implementação das classes em falta, ser
+capaz de executar tanto o `SimpleClient` como o `GUIClient`.
+
+Caso tenha outra configuração, terá de resolver as potenciais dependências em
+falta.
+
+Se por alguma razão não conseguir que as classes que dependem do SWT compilem
+ou corram, não perca tempo com isso e use apenas o `SimpleClient`.
+
+## Links Úteis
+
+- JDK 17 Oracle:
+	https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+- SWT (Standard Widget Toolkit): https://www.eclipse.org/swt/
+- JavaXT: https://www.javaxt.com
+

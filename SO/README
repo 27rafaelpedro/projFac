@@ -1,0 +1,132 @@
+#SOEstimate 
+
+O SOestimate é um sistema de processamento distribuído baseado em múltiplos processos 
+que comunicam através de Memória Partilhada. O objetivo é simular uma cadeia de
+produção de dados, desde o pedido de medição até ao cálculo estatístico final.
+Na Fase 2, o sistema foi dotado de mecanismos avançados de sincronização baseados em Semáforos para eliminar condições de corrida, 
+um motor de logs assíncrono com carimbo de tempo preciso, e um sistema de monitorização ativa assente no tratamento de sinais.
+
+
+# Pré-requisitos   
+
+- Sitema Operativo: Ambiente baseado em Unix/Linux
+
+- Compilador: gcc 
+
+- Ferramenta de Automação: Make 
+
+
+
+
+# Estutura do Projeto 
+
+SO-042-P1/
+|
+├── bin/
+|
+├── inc/
+|   ├── sensor.h
+|   ├── conttroler.h
+|   ├── csettings.h
+|   ├── csignal.h
+|   ├── cstats.h
+|   ├── ctime.h
+|   ├── main.h
+|   ├── memory.h
+|   ├── process.h
+|   ├── random_measurement.h
+|   ├── sensor.h
+|   ├── server.h
+|   └── synchronization.h
+|
+├── src/
+|   ├── clog.c
+│   ├── controller.c
+|   ├── csettings.c
+|   ├── csignal.c
+|   ├── cstats.c
+|   ├── ctime.c
+│   ├── main.c
+│   ├── memory.c
+│   ├── process.c
+│   ├── random_measurement.c
+│   ├── sensor.c
+│   ├── server.c
+|   ├── ctime..c
+|   └── synchronization.c
+│       
+│     
+└── makefile
+
+
+
+# Features
+
+Processamento Multi-processo:  Utilização de fork() para criar processos (Sensores, Controladores e Servidores) que trabalham em paralelo.
+
+
+Comunicação IPC: Uso intensivo de Memória Partilhada (Shared Memory) para troca de dados rápida entre procesos.
+
+
+Sincronização : Utilização de Semáforos para gerir a concorrência e evitar condições de corrida  nos buffers partilhados
+
+
+Mecanismo Log : Registo detalhado e cronometrado  de todas as operações e resultados gerados no sistema.
+
+
+Tratamento de sinais: Implementação de um alarme periódico  para exibição do estado das medições ativas e interceção para encerramento do sistema.
+
+
+
+
+# Compilação  e Execução 
+
+Via GCC direto:
+
+  gcc -Wall src/*.c -Iinc -o bin/SOestimate -lm
+   ./bin/SOestimate agrs.txt settings.txt
+
+Via Make:
+
+  make 
+  ./bin/SOestimate agrs.txt settings.txt
+
+Limpeza de ficheiros temporários:
+  
+  make clean 
+
+
+
+
+
+# C Files
+
+Main - Responsável por inicializar a memória partilhada, criar os processos e gerir a interface de utilizador.
+Coordena o encerramento seguro do sistema, garantindo a libertação de todos os recursos IPC.
+
+
+Sensor -  Responsável por ler pedidos do buffer circular e gerar medições simuladas 
+com base em parâmetros configuráveis.
+
+
+
+Controller - Atua como um filtro, processando apenas medições do sensor correspondente e validando o valor medido.
+
+
+
+Server - Módulo final que aceita os dados validados para produzir as estimativas e médias do sistema.
+
+
+Memory - Define as esturutras de dados que permitem a comunicação segura entre processos.
+
+
+Synchronization - Cria, inicializa e destrói os semáforos necessários para bloquear/desbloquear os processos produtores e consumidores nos buffers.
+
+
+Log  - Responsável pela inicialização, escrita concorrente e leitura indexada do histórico do sistema.
+
+
+Time -  Disponibiliza funções auxiliares para capturar o tempo do sistema em tempo real.
+
+
+Signal - Lida com a configuração dos tratadores de sinais, controlando o temporizador dos alarmes de monitorização e o fluxo de fecho forçado.
